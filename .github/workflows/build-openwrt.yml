@@ -4,7 +4,6 @@
 #========================================
 #
 name: Build openwrt
-#
 on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
