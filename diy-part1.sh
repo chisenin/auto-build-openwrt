@@ -17,4 +17,4 @@
 # 添加科学上网和依赖库 | 2020/7/3 by chisenin
 git clone https://github.com/rufengsuixing/luci-app-adguardhome ./package/luci-app-adguardhome
 git clone https://github.com/fw876/helloworld  ./package/helloworld
-git clone checkout -b AdGuardHome-latest https://github.com/AdguardTeam/AdGuardHome ./package/AdGuardHome
+git clone https://github.com/AdguardTeam/AdGuardHome ./package/AdGuardHome
