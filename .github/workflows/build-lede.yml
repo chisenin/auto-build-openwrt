@@ -93,7 +93,7 @@ jobs:
 
 # SSH连接开关
     - name: SSH connection to Actions
-      uses: chisenin/debugger-action@master
+      uses: P3TERX/debugger-action@master # 试图改变此行时出错
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
 # 下载dl库
