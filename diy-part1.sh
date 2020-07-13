@@ -18,3 +18,4 @@
 git clone https://github.com/rufengsuixing/luci-app-adguardhome ./package/luci-app-adguardhome
 git clone https://github.com/fw876/helloworld  ./package/helloworld
 git clone https://github.com/AdguardTeam/AdGuardHome ./package/AdGuardHome
+git clone https://github.com/zeruns/openwrt-r8168.git ./package/r8168
