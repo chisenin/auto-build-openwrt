@@ -7,21 +7,21 @@
 #=================================================
 
 name: Build lede
-
-on:
+on: # 启动条件列表
   repository_dispatch:
-  release:
+  release:  # 版本变化启动
     types: published
-  push:
+  push: # 推送事件启动
     branches:
       - master
-    paths:
-      - 'lede.defconfig'
-#  schedule:
+    paths:  # 文件事件启动
+      - 'lede.defconfig'  # 监视文件变化
+#  schedule:  # 定时启动
 #    - cron: 0 8 * * 5
-  watch:
-    types: started
-
+  watch:  # 监视事件启动
+    types: started  # 监视主页面star点击事件
+    
+# 全局变量
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
@@ -32,19 +32,19 @@ env:
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
-  # UPLOAD_COWTRANSFER: false
-  # UPLOAD_WETRANSFER: false
   TZ: Asia/Shanghai
 
+# 主任务
 jobs:
   build:
-    runs-on: ubuntu-18.04
-    if: github.event.repository.owner.id == github.event.sender.id
+    runs-on: ubuntu-18.04 #工作操作系统环境
+    if: github.event.repository.owner.id == github.event.sender.id  # 单击事件＝自己单击时
 
     steps:
-    - name: Checkout
+    - name: Checkout  # actions版本
       uses: actions/checkout@master
 
+# 初始化编译环境，安装必要工具
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -57,27 +57,32 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-        
+
+# 克隆源代码
     - name: Clone source code
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        
+ 
+# 调用自定义脚本1
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-        
+
+# 更新软件包列表
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
+# 安装软件包
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+# 调用自定义脚本2
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -85,11 +90,13 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        
+
+# SSH连接开关
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
+      uses: chisenin/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
+# 下载dl库
     - name: Download package
       id: package
       run: |
@@ -98,7 +105,8 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
+
+# 编译固件
     - name: Compile the firmware
       id: compile
       run: |
@@ -109,11 +117,13 @@ jobs:
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
         echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
-        
+
+# 检查已用空间
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
 
+# 推送./bin目录
     - name: Upload bin directory
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
@@ -121,6 +131,7 @@ jobs:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
 
+# 整理输出文件
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
@@ -129,24 +140,11 @@ jobs:
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
-        
+
+# 推送固件到actions页面
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
-    # - name: Upload firmware to cowtransfer
-      # if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
-      # run: |
-        # curl -fsSL git.io/file-transfer | sh
-        # ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
-        # echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        
-    # - name: Upload firmware to WeTransfer
-      # if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
-      # run: |
-        # curl -fsSL git.io/file-transfer | sh
-        # ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
-        # echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
