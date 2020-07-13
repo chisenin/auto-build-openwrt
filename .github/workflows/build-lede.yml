@@ -15,7 +15,7 @@ on: # 启动条件列表
     branches:
       - master
     paths:  # 文件事件启动
-      - 'lede.defconfig'  # 监视文件变化
+      - 'lede.config'  # 监视文件变化
 #  schedule:  # 定时启动
 #    - cron: 0 8 * * 5
   watch:  # 监视事件启动
@@ -26,7 +26,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: lede.defconfig
+  CONFIG_FILE: lede.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   SSH_ACTIONS: false
