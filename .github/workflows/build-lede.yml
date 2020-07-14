@@ -1,6 +1,5 @@
-#
+
 name: Build lede
-#
 on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
@@ -14,22 +13,21 @@ on: # 启动条件列表
 #    - cron: 0 8 * * 5
   watch:  # 监视事件启动
     types: started  # 监视主页面star点击事件
-#    
-# 全局变量
-env:
+   
+
+env: # 全局变量
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: lede.config
-  DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: diy-part2.sh
+  DIY_P1_SH: diy-lede1.sh
+  DIY_P2_SH: diy-lede2.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
-#
-# 主任务
-jobs:
+
+jobs: # 主任务
   build:
     runs-on: ubuntu-18.04 #工作操作系统环境
     if: github.event.repository.owner.id == github.event.sender.id  # 单击事件＝自己单击时
@@ -37,9 +35,8 @@ jobs:
     steps:
     - name: Checkout  # actions版本
       uses: actions/checkout@master
-#
-# 初始化编译环境，安装必要工具
-    - name: Initialization environment
+
+    - name: Initialization environment # 初始化编译环境，安装必要工具
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
@@ -51,47 +48,40 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-#
-# 克隆源代码
-    - name: Clone source code
+
+    - name: Clone source code # 克隆源代码
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-# 
-# 调用自定义脚本1
-    - name: Load custom feeds
+
+    - name: Load custom feeds # 调用自定义脚本1
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-#
-# 更新软件包列表
-    - name: Update feeds
+
+    - name: Update feeds # 更新软件包列表
       run: cd openwrt && ./scripts/feeds update -a
-#
-# 安装软件包
-    - name: Install feeds
+
+    - name: Install feeds # 安装软件包
       run: cd openwrt && ./scripts/feeds install -a
-#
-# 调用自定义脚本2
-    - name: Load custom configuration
+
+    - name: Load custom configuration # 调用自定义脚本2
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-#
-# SSH连接开关
-    - name: SSH connection to Actions
+
+    - name: SSH connection to Actions # SSH连接开关
       uses: P3TERX/debugger-action@master # 试图改变此行时出错
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
-#
-# 下载dl库
-    - name: Download package
+
+    - name: Download package # 下载dl库
       id: package
       run: |
         cd openwrt
@@ -99,9 +89,8 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-#
-# 编译固件
-    - name: Compile the firmware
+
+    - name: Compile the firmware # 编译固件
       id: compile
       run: |
         cd openwrt
@@ -112,22 +101,19 @@ jobs:
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
         echo "::set-env name=FILE_DATE::_$(date)"
         # echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
-#
-# 检查已用空间
-    - name: Check space usage
+
+    - name: Check space usage # 检查已用空间
       if: (!cancelled())
       run: df -hT
-#
-# 推送./bin目录
-    - name: Upload bin directory
+
+    - name: Upload bin directory # 推送./bin目录
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
-#
-# 整理输出文件
-    - name: Organize files
+
+    - name: Organize files # 整理输出文件
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
@@ -135,11 +121,10 @@ jobs:
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
-#
-# 推送固件到actions页面
-    - name: Upload firmware directory
+
+    - name: Upload firmware directory # 推送固件到actions页面
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: LEDE_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
