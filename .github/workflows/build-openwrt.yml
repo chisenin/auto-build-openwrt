@@ -4,6 +4,7 @@
 #========================================
 #
 name: Build openwrt
+#
 on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
@@ -21,7 +22,7 @@ on: # 启动条件列表
 # 全局变量
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-v19.07
+  REPO_BRANCH: openwrt-19.07
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: openwrt.config
   DIY_P1_SH: diy-part1.sh
