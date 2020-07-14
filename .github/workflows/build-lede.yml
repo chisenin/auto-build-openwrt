@@ -5,11 +5,11 @@ on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
     types: published
-  push: # 推送事件启动
-    branches:
-      - master
-    paths:  # 文件事件启动
-      - 'lede.config'  # 监视文件变化
+  # push: # 推送事件启动
+  #   branches:
+  #     - master
+  #  paths:  # 文件事件启动
+  #     - 'lede.config'  # 监视文件变化
 #  schedule:  # 定时启动
 #    - cron: 0 8 * * 5
   watch:  # 监视事件启动
