@@ -17,7 +17,8 @@
   
 - 最新源代码去掉了酸酸乳，从其它地方克隆，还包含一些常用软件包
   > git clone https://github.com/kenzok8/openwrt-packages.git ./package/packages
-  此软件包还包含passwall,编译则需要安装另一个依赖库
+  
+- 此软件包还包含passwall,编译则需要安装另一个依赖库
   > git clone https://github.com/kenzok8/small.git ./package/small
   
 - 下载和安装feeds软件包
