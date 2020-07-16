@@ -1,45 +1,42 @@
 ### 选择LuCI 配置 添加插件应用：常用
 
-> LuCI ---> Applications ---> luci-app-accesscontrol  #访问时间控制
-> LuCI ---> Applications ---> luci-app-adbyby-plus   #广告屏蔽大师Plus +
-> LuCI ---> Applications ---> luci-app-arpbind  #IP/MAC绑定
-> LuCI ---> Applications ---> luci-app-autoreboot  #支持计划重启
-> LuCI ---> Applications ---> luci-app-ddns   #动态域名 DNS（集成阿里DDNS客户端）
-> LuCI ---> Applications ---> luci-app-filetransfer  #文件传输（可web安装ipk包）
-> LuCI ---> Applications ---> luci-app-firewall   #添加防火墙
-> LuCI ---> Applications ---> luci-app-flowoffload  #Turbo ACC网络加速（集成FLOW,BBR,NAT,DNS...
-> LuCI ---> Applications ---> luci-app-frpc   #内网穿透 Frp
-> LuCI ---> Applications ---> luci-app-guest-wifi  #WiFi访客网络
-> LuCI ---> Applications ---> luci-app-ipsec-virtuald  #virtual服务器 IPSec
-> LuCI ---> Applications ---> luci-app-mwan3   #MWAN3负载均衡
-> LuCI ---> Applications ---> luci-app-mwan3helper   #MWAN3分流助手
-> LuCI ---> Applications ---> luci-app-nlbwmon   #网络带宽监视器
-> LuCI ---> Applications ---> luci-app-ramfree  #释放内存
-> LuCI ---> Applications ---> luci-app-samba   #网络共享（Samba）
->
-> LuCI ---> Applications ---> luci-app-sqm  #流量智能队列管理（QOS）
->
-> LuCI ---> Applications ---> luci-app-乳酸菌饮料-plus   #乳酸菌饮料低调上网Plus+
->     luci-app-乳酸菌饮料-plus ---> Include s-s v贰瑞 Plugin  #SS v贰瑞插件
->     luci-app-乳酸菌饮料-plus ---> Include v贰瑞  #v贰瑞代理
->     luci-app-乳酸菌饮料-plus ---> Include Trojan  #Trojan代理
->     luci-app-乳酸菌饮料-plus ---> Include red---socks2  #red---socks2代理
->     luci-app-乳酸菌饮料-plus ---> Include Kcptun  #Kcptun加速
->
-> ​    luci-app-乳酸菌饮料-plus ---> Include 违禁软件 Server  #乳酸菌饮料服务器
->
-> LuCI ---> Applications ---> luci-app-syncdial  #多拨虚拟网卡（原macvlan）
-> LuCI ---> Applications ---> luci-app-unblockmusic  #解锁网易云灰色歌曲3合1新版本
-> LuCI ---> Applications ---> luci-app-upnp   #通用即插即用UPnP（端口自动转发）
-> LuCI ---> Applications ---> luci-app-vlmcsd  #KMS服务器设置
-> LuCI ---> Applications ---> luci-app-vsftpd  #FTP服务器
-> LuCI ---> Applications ---> luci-app-wifischedule  #WiFi 计划
-> LuCI ---> Applications ---> luci-app-wirele违禁软件egdb  #WiFi无线
-> LuCI ---> Applications ---> luci-app-wol   #WOL网络唤醒
-> LuCI ---> Applications ---> luci-app-wrtbwmon  #实时流量监测
-> LuCI ---> Applications ---> luci-app-xlnetacc  #迅雷快鸟
-> LuCI ---> Applications ---> luci-app-zerotier  #ZeroTier内网穿透
-> Extra packages  --->  ipv6helper  #支持 ipv6
+| 	LuCI ---> Applications ---> luci-app-accesscontrol  	 | 	访问时间控制	 |
+| 	LuCI ---> Applications ---> luci-app-adbyby-plus   	 | 	广告屏蔽大师Plus +	 |
+| 	LuCI ---> Applications ---> luci-app-arpbind  	 | 	IP/MAC绑定	 |
+| 	LuCI ---> Applications ---> luci-app-autoreboot  	 | 	支持计划重启	 |
+| 	LuCI ---> Applications ---> luci-app-ddns   	 | 	动态域名 DNS（集成阿里DDNS客户端）	 |
+| 	LuCI ---> Applications ---> luci-app-filetransfer  	 | 	文件传输（可web安装ipk包）	 |
+| 	LuCI ---> Applications ---> luci-app-firewall   	 | 	添加防火墙	 |
+| 	LuCI ---> Applications ---> luci-app-flowoffload  	 | 	Turbo ACC网络加速（集成FLOW,BBR,NAT,DNS...	 |
+| 	LuCI ---> Applications ---> luci-app-frpc   	 | 	内网穿透 Frp	 |
+| 	LuCI ---> Applications ---> luci-app-guest-wifi  	 | 	WiFi访客网络	 |
+| 	LuCI ---> Applications ---> luci-app-ipsec-virtuald  	 | 	virtual服务器 IPSec	 |
+| 	LuCI ---> Applications ---> luci-app-mwan3   	 | 	MWAN3负载均衡	 |
+| 	LuCI ---> Applications ---> luci-app-mwan3helper   	 | 	MWAN3分流助手	 |
+| 	LuCI ---> Applications ---> luci-app-nlbwmon   	 | 	网络带宽监视器	 |
+| 	LuCI ---> Applications ---> luci-app-ramfree  	 | 	释放内存	 |
+| 	LuCI ---> Applications ---> luci-app-samba   	 | 	网络共享（Samba）	 |
+| 	LuCI ---> Applications ---> luci-app-sqm  	 | 	流量智能队列管理（QOS）	 |
+| 	LuCI ---> Applications ---> luci-app-乳酸菌饮料-plus   	 | 	乳酸菌饮料低调上网Plus+	 |
+| 	    luci-app-乳酸菌饮料-plus ---> Include s-s v贰瑞 Plugin  	 | 	SS v贰瑞插件	 |
+| 	    luci-app-乳酸菌饮料-plus ---> Include v贰瑞  	 | 	v贰瑞代理	 |
+| 	    luci-app-乳酸菌饮料-plus ---> Include Trojan  	 | 	Trojan代理	 |
+| 	    luci-app-乳酸菌饮料-plus ---> Include red---socks2  	 | 	red---socks2代理	 |
+| 	    luci-app-乳酸菌饮料-plus ---> Include Kcptun  	 | 	Kcptun加速	 |
+| 	​    luci-app-乳酸菌饮料-plus ---> Include 违禁软件 Server  	 | 	乳酸菌饮料服务器	 |
+| 	LuCI ---> Applications ---> luci-app-syncdial  	 | 	多拨虚拟网卡（原macvlan）	 |
+| 	LuCI ---> Applications ---> luci-app-unblockmusic  	 | 	解锁网易云灰色歌曲3合1新版本	 |
+| 	LuCI ---> Applications ---> luci-app-upnp   	 | 	通用即插即用UPnP（端口自动转发）	 |
+| 	LuCI ---> Applications ---> luci-app-vlmcsd  	 | 	KMS服务器设置	 |
+| 	LuCI ---> Applications ---> luci-app-vsftpd  	 | 	FTP服务器	 |
+| 	LuCI ---> Applications ---> luci-app-wifischedule  	 | 	WiFi 计划	 |
+| 	LuCI ---> Applications ---> luci-app-wirele违禁软件egdb  	 | 	WiFi无线	 |
+| 	LuCI ---> Applications ---> luci-app-wol   	 | 	WOL网络唤醒	 |
+| 	LuCI ---> Applications ---> luci-app-wrtbwmon  	 | 	实时流量监测	 |
+| 	LuCI ---> Applications ---> luci-app-xlnetacc  	 | 	迅雷快鸟	 |
+| 	LuCI ---> Applications ---> luci-app-zerotier  	 | 	ZeroTier内网穿透	 |
+| 	Extra packages  --->  ipv6helper  	 | 	支持 ipv6	 |
+
 
 
 ### 以下是全部：  注：应用后面标记 “ * ” 为最近新添加
