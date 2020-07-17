@@ -12,8 +12,7 @@ on: # 启动条件列表
 #  schedule:  # 定时启动
 #    - cron: 0 8 * * 5
   watch:  # 监视事件启动
-    types: started  # 监视主页面star点击事件
-   
+    types: started  # 监视主页面star点击事件   
 
 env: # 全局变量
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -99,7 +98,7 @@ jobs: # 主任务
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
-        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
+        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%")"
 
     - name: Check space usage # 检查已用空间
       if: (!cancelled())
