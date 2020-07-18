@@ -1,6 +1,6 @@
 
 name: Build lede
-  id:C575:718E:2F2A0A:3260C5:5F12ACCD
+  id: C575:718E:2F2A0A:3260C5:5F12ACCD
 on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
