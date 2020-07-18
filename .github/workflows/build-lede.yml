@@ -1,6 +1,5 @@
 
 name: Build lede
-  id: C575:718E:2F2A0A:3260C5:5F12ACCD
 on: # 启动条件列表
   repository_dispatch:
   release:  # 版本变化启动
@@ -28,6 +27,7 @@ env: # 全局变量
   TZ: Asia/Shanghai
 
 jobs: # 主任务
+  job_id: C575:718E:2F2A0A:3260C5:5F12ACCD
   build:
     runs-on: ubuntu-18.04 #工作操作系统环境
     if: github.event.repository.owner.id == github.event.sender.id  # 单击事件＝自己单击时
