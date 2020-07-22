@@ -14,6 +14,7 @@
 # Add a feed source
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 
-# 添加科学上网 | 2020/7/13 by chisenin
-git clone https://github.com/kenzok8/openwrt-packages.git ./package/packages
-git clone https://github.com/kenzok8/small.git ./package/small
+# 添加adguardhome和ssrPLUS+ | 2020/7/22 by chisenin
+svn co https://github.com/kenzok8/openwrt-packages/tree/master/adguardhome ./package/adguardhome
+svn co https://github.com/kenzok8/openwrt-packages/tree/master/luci-app-adguardhome ./package/luci-app-adguardhome
+svn co https://github.com/kenzok8/openwrt-packages/tree/master/luci-app-ssr-plus ./package/luci-app-ssr-plus
