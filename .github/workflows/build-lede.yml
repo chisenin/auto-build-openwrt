@@ -21,7 +21,7 @@ env: # 全局变量
   CONFIG_FILE: lede.config
   DIY_P1_SH: diy-lede1.sh
   DIY_P2_SH: diy-lede2.sh
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
