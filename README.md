@@ -11,6 +11,7 @@
   
 1.3 克隆源代码
   > git clone https://github.com/coolsnowwolf/lede openwrt
+  >
   > git clone -b lede-17.01 https://github.com/coolsnowwolf/openwrt openwrt
   
 1.4 进入工作目录
