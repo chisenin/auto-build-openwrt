@@ -16,7 +16,7 @@ on: # 启动条件列表
 
 env: # 全局变量
   REPO_URL: https://github.com/coolsnowwolf/openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: lede-17.01
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: lede.config
   DIY_P1_SH: diy-lede1.sh
