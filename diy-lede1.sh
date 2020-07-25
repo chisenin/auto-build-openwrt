@@ -17,3 +17,13 @@
 # 添加adguardhome
 # svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-adguardhome ./package/luci-app-adguardhome
 # svn co https://github.com/kenzok8/openwrt-packages/trunk/adguardhome ./package/AdGuardHome
+
+# 添加passwall
+svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-passwall ./package/luci-app-passwall
+
+# 添加编译passwall的依赖包
+git clone https://github.com/kenzok8/small.git ./package/small
+
+# 添加smartdns
+svn co https://github.com/kenzok8/openwrt-packages/trunk/smartdns ./package/smartdns
+svn co https://github.com/kenzok8/openwrt-packages/trunk/luci-app-smartdns ./package/luci-app-smartdns
