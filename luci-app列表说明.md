@@ -18,13 +18,13 @@
 | LuCI ---> Applications ---> luci-app-ramfree            | 释放内存                                   |
 | LuCI ---> Applications ---> luci-app-samba              | 网络共享（Samba）                          |
 | LuCI ---> Applications ---> luci-app-sqm                | 流量智能队列管理（QOS）                    |
-| LuCI ---> Applications ---> luci-app-乳酸菌饮料-plus    | 乳酸菌饮料低调上网Plus+                    |
-| luci-app-乳酸菌饮料-plus ---> Include s-s v贰瑞 Plugin  | SS v贰瑞插件                               |
-| luci-app-乳酸菌饮料-plus ---> Include v贰瑞             | v贰瑞代理                                  |
+| LuCI ---> Applications ---> luci-app-ssr-plus    | ssrPlus+                    |
+| luci-app-乳酸菌饮料-plus ---> Include s-s v2ray Plugin  | SS v2ray                               |
+| luci-app-乳酸菌饮料-plus ---> Include v2ray             | v2ray                                  |
 | luci-app-乳酸菌饮料-plus ---> Include Trojan            | Trojan代理                                 |
 | luci-app-乳酸菌饮料-plus ---> Include red---socks2      | red---socks2代理                           |
 | luci-app-乳酸菌饮料-plus ---> Include Kcptun            | Kcptun加速                                 |
-| luci-app-乳酸菌饮料-plus ---> Include 违禁软件 Server   | 乳酸菌饮料服务器                           |
+| luci-app-乳酸菌饮料-plus ---> Include ssr Server   | ssr server                           |
 | LuCI ---> Applications ---> luci-app-syncdial           | 多拨虚拟网卡（原macvlan）                  |
 | LuCI ---> Applications ---> luci-app-unblockmusic       | 解锁网易云灰色歌曲3合1新版本               |
 | LuCI ---> Applications ---> luci-app-upnp               | 通用即插即用UPnP（端口自动转发）           |
