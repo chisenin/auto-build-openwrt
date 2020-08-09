@@ -100,10 +100,6 @@ jobs: # 主任务
         [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
         echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d")"
 
-    - name: Check space usage # 检查已用空间
-      if: (!cancelled())
-      run: df -hT
-
     - name: Upload bin directory # 推送./bin目录
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
