@@ -9,8 +9,8 @@ on: # 启动条件列表
       # - master
   # paths:  # 文件事件启动
     # - 'lede.config'  # 监视文件变化
-  # schedule:  # 定时启动
-    # - cron: 0 8 * * 5
+  schedule:  # 定时启动
+    - cron: 0 8 * * 5
   watch:  # 监视事件启动
     types: started  # 监视主页面star点击事件   
 
